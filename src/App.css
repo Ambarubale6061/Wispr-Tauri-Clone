@@ -1,0 +1,47 @@
+body {
+  margin: 0;
+  font-family: Inter, system-ui;
+  background: #eef2f7;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  height: 100vh;
+}
+
+.sidebar {
+  background: #0f172a;
+  color: white;
+  padding: 20px;
+}
+
+.sidebar a {
+  display: block;
+  color: white;
+  margin: 12px 0;
+  text-decoration: none;
+  opacity: 0.8;
+}
+
+.sidebar a:hover {
+  opacity: 1;
+}
+
+.page {
+  padding: 30px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.card {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  font-weight: bold;
+}
