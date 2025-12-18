@@ -21,14 +21,13 @@ export default function PushToTalkButton({
 }: Props) {
   return (
     <div className="recorder-controls">
-      {/* १. सुरुवातीला दिसणारे Start बटन */}
+
       {!isRecording && !hasRecording && (
         <button className="btn primary glow-btn" onClick={onStart}>
           <span className="icon">🎤</span> Start Recording
         </button>
       )}
 
-      {/* २. रेकॉर्डिंग सुरू असतानाची बटन्स (Pause/Stop) */}
       {isRecording && !isPaused && (
         <div className="btn-group">
           <button className="btn warning" onClick={onPause}>
@@ -40,7 +39,7 @@ export default function PushToTalkButton({
         </div>
       )}
 
-      {/* ३. पॉज असतानाची बटन्स (Resume/Stop) */}
+
       {isRecording && isPaused && (
         <div className="btn-group">
           <button className="btn primary" onClick={onResume}>
@@ -52,7 +51,7 @@ export default function PushToTalkButton({
         </div>
       )}
 
-      {/* ४. रेकॉर्डिंग संपल्यावर दिसणारी बटन्स (Download & Start Again) */}
+
       {hasRecording && !isRecording && (
         <div className="btn-group fade-in">
           <button className="btn success" onClick={onDownload}>

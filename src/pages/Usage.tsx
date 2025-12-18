@@ -19,7 +19,7 @@ export default function Usage() {
       </header>
 
       <div className="usage-grid">
-        {/* मुख्य ग्राफ कार्ड - StatCard च्या आत */}
+
         <StatCard title="Overall Capacity" icon="📊">
           <div className="circle-graph-container">
             <svg width="200" height="200" viewBox="0 0 200 200">
@@ -60,7 +60,6 @@ export default function Usage() {
           </div>
         </StatCard>
 
-        {/* इतर माहितीसाठी StatCards */}
         <StatCard title="Characters Consumed" icon="📝">
           <div className="stats-info-content">
             <h2 className="big-value">{usage.toLocaleString()}</h2>

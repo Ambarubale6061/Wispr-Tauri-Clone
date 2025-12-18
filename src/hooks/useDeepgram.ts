@@ -22,8 +22,17 @@ export default function useDeepgram() {
   const [isRecording, setIsRecording] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
 
-  /* 🎤 GET MIC + START */
+  /* 🧹 CLEAR TRANSCRIPT */
+  const clearTranscript = useCallback(() => {
+    setFinalTranscript("");
+    setInterimTranscript("");
+  }, []);
+
+  /* 🎤 START */
   const start = useCallback(async () => {
+    // 🔄 Always start fresh
+    clearTranscript();
+
     const stream = await navigator.mediaDevices.getUserMedia({
       audio: {
         channelCount: 1,
@@ -79,7 +88,7 @@ export default function useDeepgram() {
 
     socket.onerror = () => stop();
     socketRef.current = socket;
-  }, []);
+  }, [clearTranscript]);
 
   /* ⏹ STOP */
   const stop = useCallback(() => {
@@ -112,5 +121,6 @@ export default function useDeepgram() {
     stop,
     pause,
     resume,
+    clearTranscript, // 👈 exposed
   };
 }

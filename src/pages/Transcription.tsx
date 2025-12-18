@@ -6,10 +6,16 @@ import { getMicrophoneStream } from "../services/audioRecorder";
 import { useApp } from "../context/AppContext";
 
 export default function Transcription() {
-  const { transcript, start, stop: stopDeepgram, isRecording } = useDeepgram();
+  const {
+    transcript,
+    start,
+    stop: stopDeepgram,
+    isRecording,
+    clearTranscript // ✅ correct
+  } = useDeepgram();
+
   const { addActivity } = useApp();
 
-  // Typescript Refs
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const audioChunksRef = useRef<Blob[]>([]);
 
@@ -18,15 +24,15 @@ export default function Transcription() {
 
   const hasRecording = Boolean(audioBlob);
 
-  /* START */
+  /* ▶️ START */
   const handleStart = async () => {
     try {
+      clearTranscript(); // 🧹 clear old transcript
+
       const stream = await getMicrophoneStream();
 
-      // Deepgram start
-      start(stream);
+      start(); // ✅ NO arguments
 
-      // Audio recording setup
       const mediaRecorder = new MediaRecorder(stream);
       mediaRecorderRef.current = mediaRecorder;
       audioChunksRef.current = [];
@@ -41,8 +47,7 @@ export default function Transcription() {
         const blob = new Blob(audioChunksRef.current, { type: "audio/webm" });
         setAudioBlob(blob);
         addActivity("New transcription created");
-        
-        // Stop all tracks to release microphone
+
         stream.getTracks().forEach(track => track.stop());
       };
 
@@ -54,7 +59,7 @@ export default function Transcription() {
     }
   };
 
-  /* PAUSE */
+  /* ⏸ PAUSE */
   const handlePause = () => {
     if (mediaRecorderRef.current?.state === "recording") {
       mediaRecorderRef.current.pause();
@@ -62,7 +67,7 @@ export default function Transcription() {
     }
   };
 
-  /* RESUME */
+  /* ▶️ RESUME */
   const handleResume = () => {
     if (mediaRecorderRef.current?.state === "paused") {
       mediaRecorderRef.current.resume();
@@ -70,14 +75,14 @@ export default function Transcription() {
     }
   };
 
-  /* STOP */
+  /* ⏹ STOP */
   const handleStop = () => {
     mediaRecorderRef.current?.stop();
     stopDeepgram();
     setIsPaused(false);
   };
 
-  /* DOWNLOAD */
+  /* ⬇️ DOWNLOAD */
   const handleDownload = () => {
     if (!audioBlob) return;
 
@@ -99,8 +104,12 @@ export default function Transcription() {
       </header>
 
       <div className="transcription-layout">
-        {/* Animated Visualizer */}
-        <div className={`visualizer-card ${isRecording && !isPaused ? 'is-active' : ''}`}>
+        {/* Visualizer */}
+        <div
+          className={`visualizer-card ${
+            isRecording && !isPaused ? "is-active" : ""
+          }`}
+        >
           <div className="visualizer-waves">
             {[...Array(12)].map((_, i) => (
               <div key={i} className="v-bar"></div>
@@ -131,13 +140,19 @@ export default function Transcription() {
           />
         </div>
 
-        {/* Live Output */}
+        {/* Transcript */}
         <div className="transcript-container">
           <div className="transcript-header">
             <h3>Live Transcript</h3>
-            {isRecording && !isPaused && <div className="live-indicator">Processing...</div>}
+            {isRecording && !isPaused && (
+              <div className="live-indicator">Processing...</div>
+            )}
           </div>
-          <TranscriptBox text={transcript} />
+
+          <TranscriptBox
+            text={transcript}
+            onClear={clearTranscript} // ✅ works
+          />
         </div>
       </div>
     </section>

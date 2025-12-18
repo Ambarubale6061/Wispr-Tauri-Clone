@@ -21,7 +21,6 @@ export default function Activity() {
         <p className="page-subtitle">Track your transcription trends and logs</p>
       </header>
 
-      {/* --- नवीन ग्राफ सेक्शन --- */}
       <div className="activity-chart-card">
         <div className="chart-header">
           <h3>Activity Trends</h3>

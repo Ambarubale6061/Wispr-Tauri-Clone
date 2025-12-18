@@ -1040,7 +1040,6 @@ button {
   animation: slideUp 0.3s ease-out;
 }
 
-/* नवीन 'Start New' बटनची स्टाईल */
 .btn.secondary {
   background: rgba(255, 255, 255, 0.1);
   color: #fff;
@@ -1088,11 +1087,10 @@ button {
   gap: 15px;
 }
 
-/* माउस नेल्यावर होणारा बदल */
 .stat-card-premium:hover {
   transform: translateY(-5px);
   background: rgba(30, 41, 59, 0.6);
-  border-color: rgba(34, 211, 238, 0.3); /* Cyan border on hover */
+  border-color: rgba(34, 211, 238, 0.3);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
@@ -1129,7 +1127,6 @@ button {
   z-index: 2;
 }
 
-/* मागील बाजूचा Glow Effect */
 .card-glow-effect {
   position: absolute;
   top: -50%;
@@ -1150,7 +1147,6 @@ button {
   opacity: 1;
 }
 
-/* खालची ॲनिमेटेड लाईन */
 .card-border-bottom {
   position: absolute;
   bottom: 0;
@@ -1241,7 +1237,7 @@ button {
   font-weight: 800;
   color: #f8fafc;
   margin: 5px 0;
-  font-family: "JetBrains Mono", monospace; /* जर असेल तर, नसेल तर साधी वापरा */
+  font-family: "JetBrains Mono", monospace;
 }
 
 .limit-text {
@@ -1323,7 +1319,7 @@ button {
 }
 
 /* --------------------- Topbar --------------------- */
-/* --------------------- Topbar Styles --------------------- */
+
 .topbar {
   display: flex;
   justify-content: space-between;
@@ -1614,7 +1610,6 @@ button {
 }
 
 /* -----------------Sidebar---------------- */
-/* -------- Sidebar Base -------- */
 .sidebar {
   height: 100vh;
   background: linear-gradient(180deg, #020617, #0f172a);
@@ -1735,4 +1730,23 @@ button {
   height: 10px;
   border-radius: 50%;
   background: #22c55e;
+}
+/* --------------------- Clear Transcript Button --------------------- */
+.clear-btn {
+  background: rgba(34, 211, 238, 0.1);
+  color: #22d3ee;
+  border: 1px solid rgba(34, 211, 238, 0.2);
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-left: 10px;
+}
+
+/* Hover */
+.clear-btn:hover {
+  background: #22d3ee;
+  color: #0f172a;
 }

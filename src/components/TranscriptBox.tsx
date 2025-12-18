@@ -2,13 +2,14 @@ import { useEffect, useRef } from "react";
 
 type Props = {
   text: string;
+  onClear: () => void; 
 };
 
-export default function TranscriptBox({ text }: Props) {
+export default function TranscriptBox({ text, onClear }: Props) {
   const hasText = Boolean(text?.trim());
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  // टेक्स्ट कॉपी करण्यासाठी फंक्शन
+  // Copy transcript
   const handleCopy = () => {
     if (text) {
       navigator.clipboard.writeText(text);
@@ -16,7 +17,14 @@ export default function TranscriptBox({ text }: Props) {
     }
   };
 
-  // Auto-scroll to bottom when text changes
+  // Clear transcript
+  const handleClear = () => {
+    if (hasText) {
+      onClear(); // parent state clear
+    }
+  };
+
+  // Auto-scroll on text update
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
@@ -28,18 +36,32 @@ export default function TranscriptBox({ text }: Props) {
       {/* Header */}
       <header className="transcript-box-header">
         <div className="header-left">
-          <div className={`status-indicator ${hasText ? 'is-live' : ''}`}></div>
+          <div className={`status-indicator ${hasText ? "is-live" : ""}`} />
           <h3 className="transcript-title">Real-time Analysis</h3>
         </div>
-        
+
         {hasText && (
-          <button className="copy-btn" onClick={handleCopy} title="Copy Transcript">
-            Copy Text
-          </button>
+          <div className="header-actions">
+            <button
+              className="copy-btn"
+              onClick={handleCopy}
+              title="Copy Transcript"
+            >
+              Copy
+            </button>
+
+            <button
+              className="clear-btn"
+              onClick={handleClear}
+              title="Clear Transcript"
+            >
+              Clear
+            </button>
+          </div>
         )}
       </header>
 
-      {/* Content Area */}
+      {/* Content */}
       <div className="transcript-scroll-area" ref={scrollRef}>
         {hasText ? (
           <p className="transcript-text-active">
@@ -49,7 +71,7 @@ export default function TranscriptBox({ text }: Props) {
         ) : (
           <div className="transcript-empty">
             <div className="empty-visual">
-              <div className="pulse-dot"></div>
+              <div className="pulse-dot" />
             </div>
             <p className="transcript-placeholder">
               Waiting for audio input...
@@ -57,8 +79,8 @@ export default function TranscriptBox({ text }: Props) {
           </div>
         )}
       </div>
-      
-      {/* Footer Info */}
+
+      {/* Footer */}
       <footer className="transcript-footer">
         <span className="char-count">{text.length} Characters</span>
         <span className="engine-tag">BY AMBAR</span>
