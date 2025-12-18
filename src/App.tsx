@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Sidebar from "./layout/Sidebar";
+import Topbar from "./layout/Topbar";
 import Dashboard from "./pages/Dashboard";
 import Transcription from "./pages/Transcription";
 import Usage from "./pages/Usage";
@@ -14,15 +15,23 @@ export default function App() {
     <AppProvider>
       <BrowserRouter>
         <div className="layout">
+          {/* Sidebar */}
           <Sidebar />
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/transcription" element={<Transcription />} />
-            <Route path="/usage" element={<Usage />} />
-            <Route path="/quality" element={<Quality />} />
-            <Route path="/activity" element={<Activity />} />
-            <Route path="/tips" element={<Tips />} />
-          </Routes>
+
+          {/* Main Content */}
+          <main className="main-content">
+            <Topbar />
+            <div className="page-container">
+              <Routes>
+                <Route path="/" element={<Dashboard />} />
+                <Route path="/transcription" element={<Transcription />} />
+                <Route path="/usage" element={<Usage />} />
+                <Route path="/quality" element={<Quality />} />
+                <Route path="/activity" element={<Activity />} />
+                <Route path="/tips" element={<Tips />} />
+              </Routes>
+            </div>
+          </main>
         </div>
       </BrowserRouter>
     </AppProvider>

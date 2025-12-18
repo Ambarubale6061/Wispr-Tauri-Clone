@@ -1,47 +1,1738 @@
-body {
+/* --------------------- Global --------------------- */
+* {
+  box-sizing: border-box;
   margin: 0;
-  font-family: Inter, system-ui;
-  background: #eef2f7;
+  padding: 0;
 }
 
+body {
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont;
+  background: #0f172a;
+  color: #e5e7eb;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* स्क्रोलबार लपवण्यासाठी ग्लोबल सेटिंग */
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+* {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE */
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+  border: none;
+  outline: none;
+}
+
+/* --------------------- Layout --------------------- */
 .layout {
   display: grid;
-  grid-template-columns: 220px 1fr;
+  grid-template-columns: 260px 1fr;
   height: 100vh;
+  overflow: hidden;
 }
 
+.main-content {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.page-container {
+  flex: 1;
+  padding: 32px;
+  overflow-y: auto;
+}
+
+/* --------------------- Sidebar --------------------- */
 .sidebar {
-  background: #0f172a;
-  color: white;
+  background: linear-gradient(180deg, #020617, #0f172a);
+  color: #e5e7eb;
+  padding: 24px;
+  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 32px;
+}
+
+.brand-logo {
+  font-size: 20px;
+}
+
+.brand-name {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  opacity: 0.75;
+  transition: all 0.25s ease;
+}
+
+.sidebar-link.active,
+.sidebar-link:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* --------------------- Topbar --------------------- */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 32px;
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  z-index: 100;
+}
+
+.topbar-title {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.notification-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 8px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.notification-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #94a3b8;
+}
+
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  background: #22c55e;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: #0f172a;
+  font-size: 14px;
+}
+
+/* --------------------- Page --------------------- */
+.page {
+  padding: 32px;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.page-header {
+  margin-bottom: 28px;
+}
+
+.page-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.page-subtitle {
+  font-size: 14px;
+  color: #94a3b8;
+}
+
+/* --------------------- Dashboard Grid --------------------- */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 28px;
+}
+
+/* --------------------- Dashboard Card --------------------- */
+.dashboard-card {
+  position: relative;
+  display: block;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 28px;
+  border-radius: 18px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+  color: #e5e7eb;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Glow effect */
+.card-glow {
+  position: absolute;
+  top: -30%;
+  right: -30%;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.25;
+  transition: all 0.3s ease;
+}
+
+.dashboard-card:hover .card-glow {
+  opacity: 0.35;
+}
+
+/* Gradient classes */
+.from-cyan-400 {
+  background: linear-gradient(135deg, #22d3ee, #3b82f6);
+}
+.from-blue-500 {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+}
+.from-violet-400 {
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+}
+.from-purple-500 {
+  background: linear-gradient(135deg, #7c3aed, #6d28d9);
+}
+.from-emerald-400 {
+  background: linear-gradient(135deg, #34d399, #10b981);
+}
+.from-teal-500 {
+  background: linear-gradient(135deg, #14b8a6, #0d9488);
+}
+.from-amber-400 {
+  background: linear-gradient(135deg, #facc15, #f59e0b);
+}
+.from-orange-500 {
+  background: linear-gradient(135deg, #f97316, #ea580c);
+}
+.from-indigo-400 {
+  background: linear-gradient(135deg, #818cf8, #6366f1);
+}
+.from-blue-600 {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+}
+
+/* Card Content */
+.card-content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.card-icon {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s ease;
+}
+
+.dashboard-card:hover .card-icon {
+  transform: scale(1.15);
+}
+
+/* Card Title */
+.card-title {
+  font-size: 20px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+/* Arrow animation */
+.card-arrow {
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: all 0.25s ease;
+}
+
+.dashboard-card:hover .card-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Card Description */
+.card-description {
+  font-size: 14px;
+  color: #94a3b8;
+  line-height: 1.5;
+}
+
+/* --------------------- Activity List --------------------- */
+.activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.activity-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 18px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #e5e7eb;
+  transition: background 0.2s ease;
+}
+
+.activity-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.activity-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #22c55e;
+}
+
+.empty-state {
+  color: #94a3b8;
+  font-size: 14px;
+  padding: 16px;
+  text-align: center;
+}
+
+/* --------------------- PushToTalk / Buttons --------------------- */
+.recorder-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.btn {
+  padding: 12px 22px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn.primary {
+  background: #22c55e;
+  color: #0f172a;
+}
+.btn.primary:hover {
+  background: #16a34a;
+}
+.btn.warning {
+  background: #facc15;
+  color: #0f172a;
+}
+.btn.warning:hover {
+  background: #eab308;
+}
+.btn.danger {
+  background: #ef4444;
+  color: #fff;
+}
+.btn.danger:hover {
+  background: #dc2626;
+}
+.btn.success {
+  background: #3b82f6;
+  color: #fff;
+}
+.btn.success:hover {
+  background: #2563eb;
+}
+
+/* --------------------- Transcript --------------------- */
+.transcript-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 28px;
+  border-radius: 18px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+  max-height: 420px;
+  overflow-y: auto;
+}
+
+.transcript-text {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #e5e7eb;
+  word-break: break-word;
+}
+
+/* --------------------- Responsive --------------------- */
+@media (max-width: 1024px) {
+  .layout {
+    grid-template-columns: 220px 1fr;
+  }
+}
+@media (max-width: 768px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+  .sidebar {
+    position: absolute;
+    z-index: 1000;
+    height: 100%;
+    left: -100%;
+    transition: all 0.3s ease;
+  }
+  .sidebar.open {
+    left: 0;
+  }
+}
+
+/* --------------------- Dashboard Grid Update --------------------- */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 32px;
+  align-items: stretch;
+}
+
+/* --------------------- Dashboard Card Update --------------------- */
+.dashboard-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 32px;
+  border-radius: 20px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+  color: #e5e7eb;
+  min-height: 240px;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.card-glow {
+  position: absolute;
+  top: -30%;
+  right: -30%;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.25;
+  transition: all 0.3s ease;
+}
+
+.dashboard-card:hover .card-glow {
+  opacity: 0.35;
+}
+
+.card-icon {
+  width: 56px;
+  height: 56px;
+}
+.card-title {
+  font-size: 20px;
+  font-weight: 600;
+}
+.card-description {
+  font-size: 14px;
+  line-height: 1.5;
+}
+.quality-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 24px;
+}
+
+.quality-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 40px;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  transition: all 0.4s ease;
+}
+
+.glow-on-hover:hover {
+  border-color: #22d3ee;
+  box-shadow: 0 0 30px rgba(34, 211, 238, 0.15);
+  transform: translateY(-5px);
+}
+
+/* Pulsing Accuracy Effect */
+.accuracy-ring {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  background: rgba(34, 211, 238, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #22d3ee;
+}
+
+.quality-value {
+  font-size: 32px;
+  font-weight: 800;
+  color: #fff;
+  z-index: 2;
+}
+
+.pulse-ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #22d3ee;
+  animation: radar-pulse 2s infinite;
+  opacity: 0.5;
+}
+
+@keyframes radar-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+/* Mini Stats Styling */
+.mini-stats {
+  flex-direction: column;
+  justify-content: center;
+  padding: 30px;
+}
+
+.stat-item {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.stat-item span {
+  font-size: 14px;
+  color: #94a3b8;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.stat-bar {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.stat-bar .fill {
+  height: 100%;
+  background: linear-gradient(90deg, #22d3ee, #3b82f6);
+  border-radius: 4px;
+}
+/* १. लिस्ट आयटमसाठी ॲनिमेशन आणि डिझाइन */
+.activity-item-animated {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 18px 24px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  margin-bottom: 12px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  transform: translateX(-20px);
+  animation: slideInRight 0.5s forwards;
+}
+
+.activity-item-animated:hover {
+  background: rgba(255, 255, 255, 0.07);
+  transform: scale(1.01) translateX(5px);
+  border-color: rgba(34, 197, 94, 0.3);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* २. Live Pulsing Dot */
+.status-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.activity-dot-live {
+  width: 10px;
+  height: 10px;
+  background: #22c55e;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.dot-pulse {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: rgba(34, 197, 94, 0.4);
+  border-radius: 50%;
+  animation: pulse-ring 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+}
+
+/* ३. रिकाम्या स्टेटसाठी स्टाईल (Empty State) */
+.empty-state-card {
+  text-align: center;
+  padding: 60px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 2px dashed rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  color: #94a3b8;
+}
+
+.empty-icon {
+  font-size: 40px;
+  margin-bottom: 15px;
+  opacity: 0.5;
+}
+
+/* ॲनिमेशन्स */
+@keyframes slideInRight {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.5);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+/* Extra Details */
+.activity-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.activity-time {
+  font-size: 12px;
+  color: #64748b;
+  margin-top: 2px;
+}
+
+.activity-arrow {
+  color: #334155;
+  font-weight: bold;
+  opacity: 0;
+  transition: 0.3s;
+}
+
+.activity-item-animated:hover .activity-arrow {
+  opacity: 1;
+  transform: translateX(5px);
+  color: #22c55e;
+}
+/* १. Tips Grid Layout */
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+/* २. Card Styling */
+.tip-card-fancy {
+  position: relative;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 30px;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.tip-card-fancy:hover {
+  transform: translateY(-8px);
+  background: rgba(255, 255, 255, 0.07);
+  border-color: #facc15; /* Amber/Yellow border on hover */
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 15px rgba(250, 204, 21, 0.1);
+}
+
+/* ३. Icon and Numbering */
+.tip-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.tip-icon-box {
+  font-size: 32px;
+  background: rgba(250, 204, 21, 0.1);
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  border: 1px solid rgba(250, 204, 21, 0.2);
+}
+
+.tip-number {
+  font-size: 24px;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.05);
+  font-family: "serif";
+}
+
+/* ४. Text Styling */
+.tip-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.tip-text {
+  font-size: 14px;
+  color: #94a3b8;
+  line-height: 1.6;
+}
+
+/* ५. Animated Bottom Line */
+.tip-footer-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 4px;
+  background: linear-gradient(90deg, #facc15, #fbbf24);
+  transition: width 0.4s ease;
+}
+
+.tip-card-fancy:hover .tip-footer-line {
+  width: 100%;
+}
+/* Layout */
+.transcription-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+/* Visualizer Card */
+.visualizer-card {
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 24px;
+  padding: 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.visualizer-waves {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  height: 80px;
+}
+
+.v-bar {
+  width: 5px;
+  height: 10px;
+  background: rgba(34, 197, 94, 0.2);
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+/* Active Animation */
+.visualizer-card.is-active .v-bar {
+  background: #22c55e;
+  box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
+  animation: v-bounce 1.2s ease-in-out infinite;
+}
+
+.visualizer-card.is-active .v-bar:nth-child(odd) {
+  animation-delay: 0.2s;
+}
+.visualizer-card.is-active .v-bar:nth-child(even) {
+  animation-delay: 0.4s;
+}
+
+@keyframes v-bounce {
+  0%,
+  100% {
+    height: 10px;
+  }
+  50% {
+    height: 70px;
+  }
+}
+
+/* Status Tags */
+.status-tag {
+  display: inline-block;
+  margin-top: 25px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #94a3b8;
+  padding: 6px 16px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.pulse-red {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  animation: bg-pulse 2s infinite;
+}
+
+@keyframes bg-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+  }
+}
+
+/* Transcript styling */
+.transcript-container {
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 20px;
   padding: 20px;
 }
 
-.sidebar a {
-  display: block;
-  color: white;
-  margin: 12px 0;
-  text-decoration: none;
+.transcript-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.live-indicator {
+  color: #22d3ee;
+  font-size: 13px;
+  font-style: italic;
+}
+/* १. मुख्य कंटेनर - Glassmorphism */
+.transcript-box-premium {
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  height: 400px; /* फिक्स्ड हाईट ज्यामुळे स्क्रोलिंग नीट दिसेल */
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+/* २. Header Styling */
+.transcript-box-header {
+  padding: 18px 24px;
+  background: rgba(255, 255, 255, 0.03);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.status-indicator {
+  width: 8px;
+  height: 8px;
+  background: #475569;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.status-indicator.is-live {
+  background: #22c55e;
+  box-shadow: 0 0 10px #22c55e;
+}
+
+.transcript-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ३. Content & Typing Cursor */
+.transcript-scroll-area {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+  scrollbar-width: none; /* स्क्रोलबार लपवला */
+}
+
+.transcript-text-active {
+  font-size: 17px;
+  line-height: 1.8;
+  color: #e2e8f0;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.cursor-blink {
+  color: #22d3ee;
+  font-weight: bold;
+  margin-left: 4px;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* ४. Empty State */
+.transcript-empty {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.5;
+}
+
+.pulse-dot {
+  width: 12px;
+  height: 12px;
+  background: #334155;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  animation: pulse-gray 2s infinite;
+}
+
+@keyframes pulse-gray {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.9);
+    opacity: 0.5;
+  }
+}
+
+/* ५. Copy Button */
+.copy-btn {
+  background: rgba(34, 211, 238, 0.1);
+  color: #22d3ee;
+  border: 1px solid rgba(34, 211, 238, 0.2);
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.copy-btn:hover {
+  background: #22d3ee;
+  color: #0f172a;
+}
+
+/* ६. Footer */
+.transcript-footer {
+  padding: 12px 24px;
+  background: rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #475569;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+.recorder-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.btn-group {
+  display: flex;
+  gap: 12px;
+  animation: slideUp 0.3s ease-out;
+}
+
+/* नवीन 'Start New' बटनची स्टाईल */
+.btn.secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn.secondary:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #fff;
+}
+
+/* Glow Effect for Primary Start */
+.glow-btn {
+  box-shadow: 0 0 15px rgba(34, 197, 94, 0.3);
+  transition: all 0.3s ease;
+}
+
+.glow-btn:hover {
+  box-shadow: 0 0 25px rgba(34, 197, 94, 0.5);
+  transform: scale(1.05);
+}
+
+/* Animation */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.stat-card-premium {
+  position: relative;
+  background: rgba(30, 41, 59, 0.4); /* Slate-800 with transparency */
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 24px;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* माउस नेल्यावर होणारा बदल */
+.stat-card-premium:hover {
+  transform: translateY(-5px);
+  background: rgba(30, 41, 59, 0.6);
+  border-color: rgba(34, 211, 238, 0.3); /* Cyan border on hover */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.stat-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stat-icon {
+  font-size: 1.2rem;
   opacity: 0.8;
 }
 
-.sidebar a:hover {
+.stat-card-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #94a3b8; /* Slate-400 */
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-card-content {
+  font-size: 24px;
+  font-weight: 700;
+  color: #f8fafc;
+  z-index: 2;
+}
+
+/* मागील बाजूचा Glow Effect */
+.card-glow-effect {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle,
+    rgba(34, 211, 238, 0.05) 0%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.stat-card-premium:hover .card-glow-effect {
   opacity: 1;
 }
 
-.page {
-  padding: 30px;
+/* खालची ॲनिमेटेड लाईन */
+.card-border-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 0;
+  background: linear-gradient(90deg, #22d3ee, #3b82f6);
+  transition: width 0.4s ease;
 }
 
-.grid {
+.stat-card-premium:hover .card-border-bottom {
+  width: 100%;
+}
+
+.status-dot-mini {
+  width: 6px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+}
+/* --------------------- Usage Page Layout --------------------- */
+.usage-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 30px;
+  margin-top: 20px;
+}
+
+/* --------------------- Circular Graph Styling --------------------- */
+.circle-graph-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+  min-height: 220px;
+}
+
+.circle-bg-dim {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.05);
+  stroke-width: 12px;
+}
+
+.circle-progress-live {
+  fill: none;
+  stroke-width: 12px;
+  stroke-linecap: round;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+  transition: stroke-dashoffset 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Percentage Overlay (Center of Circle) */
+.percentage-overlay {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.p-large {
+  font-size: 36px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.p-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #64748b;
+  letter-spacing: 2px;
+  margin-top: -5px;
+}
+
+/* --------------------- Character Stats Card --------------------- */
+.stats-info-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.big-value {
+  font-size: 42px;
+  font-weight: 800;
+  color: #f8fafc;
+  margin: 5px 0;
+  font-family: "JetBrains Mono", monospace; /* जर असेल तर, नसेल तर साधी वापरा */
+}
+
+.limit-text {
+  font-size: 14px;
+  color: #94a3b8;
+  margin-bottom: 15px;
+}
+
+/* Linear Progress Bar */
+.usage-progress-track {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.usage-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #22d3ee, #22c55e);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.4);
+  transition: width 1s ease-in-out;
+}
+
+/* --------------------- System Health Card --------------------- */
+.status-flex {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.live-dot-pulse {
+  width: 14px;
+  height: 14px;
+  background: #22c55e;
+  border-radius: 50%;
+  position: relative;
+}
+
+.live-dot-pulse::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #22c55e;
+  border-radius: 50%;
+  animation: pulse-ring 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.7);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+.status-text-live {
+  font-size: 20px;
+  font-weight: 700;
+  color: #22c55e;
+}
+
+.status-desc {
+  font-size: 14px;
+  color: #94a3b8;
+  line-height: 1.5;
+}
+
+/* --------------------- Hover Glow for SVG --------------------- */
+.stat-card-premium:hover .circle-progress-live {
+  filter: drop-shadow(0 0 12px rgba(34, 211, 238, 0.8));
+  stroke-width: 14px;
+}
+
+/* --------------------- Topbar --------------------- */
+/* --------------------- Topbar Styles --------------------- */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 32px;
+  background: rgba(15, 23, 42, 0.8); /* डार्क बॅकग्राउंड */
+  backdrop-filter: blur(12px); /* ग्लास इफेक्ट */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 90; /* Sidebar च्या खाली पण Content च्या वर */
+  height: 70px;
+}
+
+.topbar-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #f8fafc;
+  letter-spacing: 0.5px;
+}
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
   gap: 20px;
 }
 
-.card {
-  background: white;
-  padding: 30px;
+/* Notification Button Styling */
+.notification-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.03);
+  color: #94a3b8;
+  padding: 10px;
   border-radius: 12px;
-  text-align: center;
-  font-weight: bold;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.notification-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #22d3ee; /* Cyan color on hover */
+  transform: translateY(-2px);
+  border-color: rgba(34, 211, 238, 0.3);
+}
+
+/* Dot for new notifications (Optional) */
+.notification-btn::after {
+  content: "";
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 8px;
+  height: 8px;
+  background: #ef4444; /* Red dot */
+  border-radius: 50%;
+  border: 2px solid #0f172a;
+}
+
+/* User Profile Styling */
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-left: 20px;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.user-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #e2e8f0;
+}
+
+.user-avatar {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, #22d3ee 0%, #3b82f6 100%);
+  color: #fff;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 16px;
+  box-shadow: 0 4px 12px rgba(34, 211, 238, 0.3);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.user-avatar:hover {
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* Responsive Topbar */
+@media (max-width: 768px) {
+  .topbar {
+    padding: 12px 20px;
+  }
+
+  .user-name {
+    display: none; /* मोबाईलवर फक्त नाव लपवा, अवतार दिसेल */
+  }
+}
+
+.sidebar-footer {
+  margin-top: auto; /* push footer to bottom */
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dev-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dev-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dev-label {
+  font-size: 10px;
+  color: #94a3b8;
+}
+
+.dev-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #e5e7eb;
+}
+
+.dev-status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #22c55e; /* green dot */
+}
+
+/* ---------------------Activity --------------------- */
+/* Activity Chart Card */
+.activity-chart-card {
+  background: rgba(30, 41, 59, 0.4);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 24px;
+  padding: 30px;
+  margin-bottom: 40px;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.chart-header h3 {
+  font-size: 18px;
+  color: #f8fafc;
+}
+
+.chart-tag {
+  font-size: 12px;
+  padding: 4px 12px;
+  background: rgba(34, 211, 238, 0.1);
+  color: #22d3ee;
+  border-radius: 100px;
+  border: 1px solid rgba(34, 211, 238, 0.2);
+}
+
+/* Bar Chart */
+.bar-chart-container {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  height: 180px;
+  padding-top: 20px;
+}
+
+.bar-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  gap: 15px;
+}
+
+.bar-fill {
+  width: 30px;
+  background: linear-gradient(180deg, #22d3ee 0%, #3b82f6 100%);
+  border-radius: 8px 8px 4px 4px;
+  position: relative;
+  cursor: pointer;
+  animation: growUp 1s ease-out forwards;
+  transform-origin: bottom;
+}
+
+.bar-fill:hover {
+  filter: brightness(1.2);
+  box-shadow: 0 0 20px rgba(34, 211, 238, 0.4);
+}
+
+.bar-tooltip {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1e293b;
+  color: #fff;
+  font-size: 10px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  opacity: 0;
+  transition: 0.3s;
+  pointer-events: none;
+}
+
+.bar-fill:hover .bar-tooltip {
+  opacity: 1;
+  top: -35px;
+}
+
+.bar-label {
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.list-title {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: #94a3b8;
+}
+
+@keyframes growUp {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+.transcript-scroll-area {
+  max-height: 420px;
+  overflow-y: auto;
+}
+
+.transcript-text {
+  font-size: 15px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.cursor {
+  display: inline-block;
+  margin-left: 2px;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%,
+  50%,
+  100% {
+    opacity: 1;
+  }
+  25%,
+  75% {
+    opacity: 0;
+  }
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #6b7280;
+}
+
+.status-dot.live {
+  background: #22c55e;
+}
+
+/* -----------------Sidebar---------------- */
+/* -------- Sidebar Base -------- */
+.sidebar {
+  height: 100vh;
+  background: linear-gradient(180deg, #020617, #0f172a);
+  display: flex;
+  flex-direction: column;
+  padding: 18px;
+  overflow: hidden; /* 🔥 white scrollbar removed */
+  box-shadow: 2px 0 20px rgba(0, 0, 0, 0.35);
+}
+
+/* -------- Brand -------- */
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.logo-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #22d3ee, #3b82f6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.45);
+}
+
+.brand-name {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.collapse-btn {
+  position: absolute;
+  right: 0;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 4px;
+  color: #e5e7eb;
+}
+
+/* -------- Nav -------- */
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px;
+  border-radius: 12px;
+  color: #cbd5f5;
+  transition: all 0.25s ease;
+}
+
+.sidebar-link:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.sidebar-link.active {
+  background: linear-gradient(
+    135deg,
+    rgba(34, 211, 238, 0.25),
+    rgba(59, 130, 246, 0.25)
+  );
+  color: #fff;
+}
+
+.icon-wrap {
+  min-width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.link-text {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* -------- Footer -------- */
+.sidebar-footer {
+  margin-top: auto;
+}
+
+.dev-card {
+  background: rgba(255, 255, 255, 0.06);
+  padding: 14px;
+  border-radius: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dev-label {
+  font-size: 11px;
+  color: #94a3b8;
+}
+
+.dev-name {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.dev-status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #22c55e;
 }
