@@ -124,26 +124,11 @@ flowchart TD
 
 ## 🎥 ScreenShots
 
-## 📸 Screenshots (Mobile-Friendly)
-
-Use **HTML `<img>` tags** with `width="100%"` so images scale on **any device**:
-
 <h3>Dashboard</h3>
 <img src="./public/Dashboard.jpg" alt="Dashboard" width="100%" />
 
 <h3>Live Transcription</h3>
 <img src="./public/Transcription.jpg" alt="Live Transcription" width="100%" />
-
-```html
-<a href="./public/Dashboard.jpg"
-  ><img src="./public/Dashboard.jpg" width="100%"
-/></a>
-<a href="./public/Transcription.jpg"
-  ><img src="./public/Transcription.jpg" width="100%"
-/></a>
-```
-
-- Click opens full-size image on mobile or desktop.
 
 ---
 
