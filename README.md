@@ -52,32 +52,41 @@ This project is a **functional clone of Wispr Flow**, focusing on **core voice-t
 ## 📁 Project Structure
 
 ```txt
-wispr-tauri-clone/
+Wispr-Tauri-Clone/
+├── .gitignore
+├── README.md
 ├── package.json
+├── package-lock.json
 ├── tsconfig.json
 ├── vite.config.ts
-├── App.css
-├── .env
+├── .env.example
 ├── src/
 │   ├── App.tsx
-│   ├── context/AppContext.tsx
-│   ├── layout/Sidebar.tsx
-│   ├── layout/Topbar.tsx
-│   ├── pages/Dashboard.tsx
-│   ├── pages/Transcription.tsx
-│   ├── pages/Usage.tsx
-│   ├── pages/Quality.tsx
-│   ├── pages/Activity.tsx
-│   ├── pages/Tips.tsx
-│   ├── services/transcription.ts
-│   └── styles/sidebar.css
+│   ├── App.css
+│   ├── context/
+│   │   └── AppContext.tsx
+│   ├── layout/
+│   │   ├── Sidebar.tsx
+│   │   └── Topbar.tsx
+│   ├── pages/
+│   │   ├── Dashboard.tsx
+│   │   ├── Transcription.tsx
+│   │   ├── Usage.tsx
+│   │   ├── Quality.tsx
+│   │   ├── Activity.tsx
+│   │   └── Tips.tsx
+│   ├── services/
+│   │   └── transcription.ts
+│   └── styles/
+│       └── sidebar.css
 ├── src-tauri/
 │   ├── Cargo.toml
-│   └── src/main.rs
-└── screenshots/
-    ├── dashboard.gif
-    ├── transcription.gif
-    └── sidebar.gif
+│   └── src/
+│       └── main.rs
+├── screenshots/
+│   ├── dashboard.gif
+│   ├── transcription.gif
+│   └── sidebar.gif
 ```
 
 ---
@@ -115,15 +124,26 @@ flowchart TD
 
 ## 🎥 ScreenShots
 
-- **Dashboard** – Overview of app
-- **Live Transcription** – Showing real-time voice-to-text
+## 📸 Screenshots (Mobile-Friendly)
 
-Example placeholders:
+Use **HTML `<img>` tags** with `width="100%"` so images scale on **any device**:
 
-```markdown
-![Dashboard](./public/Dashboard.jpg)
-![Live Transcription](./public/Transcription.jpg)
+<h3>Dashboard</h3>
+<img src="./public/Dashboard.jpg" alt="Dashboard" width="100%" />
+
+<h3>Live Transcription</h3>
+<img src="./public/Transcription.jpg" alt="Live Transcription" width="100%" />
+
+```html
+<a href="./public/Dashboard.jpg"
+  ><img src="./public/Dashboard.jpg" width="100%"
+/></a>
+<a href="./public/Transcription.jpg"
+  ><img src="./public/Transcription.jpg" width="100%"
+/></a>
 ```
+
+- Click opens full-size image on mobile or desktop.
 
 ---
 
